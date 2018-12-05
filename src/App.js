@@ -1,28 +1,19 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import TextField from '@material-ui/core/TextField';
 import './App.css';
+import Dashboard from './dashboard';
+import Panels from './panels/index'
 
 class App extends Component {
   render() {
-    return (
+    return ( 
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <Dashboard />
+      <Panels />
       </div>
     );
   }
+
 }
 
 export default App;
