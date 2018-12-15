@@ -13,7 +13,7 @@ export default () => (
           <LeftPanel />
         </Paper>
         </Grid>
-      <Grid item sm={6}>
+      <Grid item sm={9}>
         <RightPanel />
       </Grid>
     </Grid>

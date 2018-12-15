@@ -1,14 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Points from '../components/points';
+import Herbs from '../components/herbs';
+import Bio from '../components/bio';
+import Laws from '../components/laws';
+
 
 class RightPanel extends Component {
 
     render(){
-        return (
+        console.log(this.props.category)
+        if(this.props.category.category === 'points')
+        {
+            return (
             <div style={{ marginTop: 100}}>
-                {this.props.category.category}
-            </div>
-        )
+                <Points/>
+            </div>)
+        }
+        if(this.props.category.category === 'herbs')
+        {
+            return (
+            <div style={{ marginTop: 100}}>
+                <Herbs/>
+            </div>)
+        } if(this.props.category.category === 'Laws/Reg') {
+            return (
+                <div style={{ marginTop: 100}}>
+                    <Laws/>
+                </div>)
+        }  else {
+            return (
+                <div style={{ marginTop: 100}}>
+                    <Bio/>
+                </div>)
+        }
+
         
     }
 }
