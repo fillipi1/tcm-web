@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import ListItem from '@material-ui/core/ListItem';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Reducer from '../redux/categoryReducer';
+import { selectCategory } from '../redux/actions';
 
 
 
 class LeftPanel extends Component {
 
+    state={
+        category: this.props.category
+    }
     render(){
         return (
-            <div style={{marginTop: 20, flexGrow: 1}}>
+            <div style={{marginTop: 20, flexGrow: 1}} >
                 {Reducer.map(x=> 
                     <ListItem 
-                    button disableGutters divider style={styles.items}  >
-                    <div onClick={console.log(x.category)}>
+                    key={x.category}
+                    button disableGutters divider style={styles.items}  onClick={() => this.props.selectCategory(x)} >
+                    <div> 
                     {x.category}
                     </div>                       
                     </ListItem>)}
@@ -31,4 +35,14 @@ const styles = {
  }
 }
 
-export default LeftPanel
+function mapStateToProps(state) {
+    return {
+      category: state.category
+    };
+  } 
+  
+  function mapDispachToProps (dispatch) {
+    return bindActionCreators({ selectCategory }, dispatch);
+  }
+  
+  export default connect(mapStateToProps, mapDispachToProps)(LeftPanel);

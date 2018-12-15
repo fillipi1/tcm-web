@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux';
 
 class RightPanel extends Component {
 
     render(){
         return (
             <div style={{ marginTop: 100}}>
-                right panel
+                {this.props.category.category}
             </div>
         )
         
     }
 }
 
-export default RightPanel
+function mapStateToProps(state) {
+    return {
+      category: state.category
+    };
+  } 
+
+  export default connect(mapStateToProps)(RightPanel);
