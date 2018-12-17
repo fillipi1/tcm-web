@@ -7,6 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import { styled } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
+import firebase from '../firebase';
 
 function TabContainer(props) {
     return (
@@ -21,12 +22,37 @@ class Points extends Component {
 
     state={
         category: this.props.category,
-        value: 0
+        value: 0,
+        name: '',
+        location: '',
+
+
     }
     handleChange = (event, value) => {
         this.setState({ value });
       };
+      
+      handleInputName(message) {
+        this.setState({ name: message.target.value });
+      };
+
+      handleInputLocation(message) {
+        this.setState({ location: message.target.value });
+      };
+    addMessage(e) {
+        // register sent messaged from dashboard into firebase
+        if (this.state.name === '') { return console.log('nada');
+        }else{
+            const outgoingPoint = firebase.database().ref(`points/`);
+            const item = {
+                name: this.state.name,
+                location: this.state.location,
+            };
+            outgoingPoint.push(item);
+        }
+    }
     render(){
+        console.log(this.state.name, this.state.location)
         const { classes } = this.props;
         const { value } = this.state;
         return (
@@ -57,6 +83,17 @@ class Points extends Component {
                 </AppBar>
                 {value === 0 && 
                 <TabContainer >
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        value={this.state.name}
+                        onChange={message => this.handleInputName(message)}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -64,6 +101,8 @@ class Points extends Component {
                     margin="normal"
                     variant="outlined"
                     style={{width:342, padding:3}}
+                    value={this.state.location}
+                    onChange={message => this.handleInputLocation(message)}
                     />
                     <TextField
                     label='attributes'
@@ -105,10 +144,19 @@ class Points extends Component {
                     variant="outlined"
                     style={{width:342, padding:3}}
                     />
-                    <MyButton>Submit</MyButton>
+                    <MyButton onClick={this.addMessage.bind(this)}>Submit</MyButton>
                 </TabContainer>}
                 {value === 1 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -161,6 +209,15 @@ class Points extends Component {
                 </TabContainer>}
                 {value === 2 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -213,6 +270,15 @@ class Points extends Component {
                 </TabContainer>}
                 {value === 3 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -265,6 +331,15 @@ class Points extends Component {
                 </TabContainer>}
                 {value === 4 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -317,6 +392,15 @@ class Points extends Component {
                 </TabContainer>}
                 {value === 5 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -369,6 +453,15 @@ class Points extends Component {
                 </TabContainer>}
                 {value === 6 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -421,6 +514,15 @@ class Points extends Component {
                 </TabContainer>}
                 {value === 7 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -473,6 +575,15 @@ class Points extends Component {
                 </TabContainer>}
                 {value === 8 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -525,6 +636,15 @@ class Points extends Component {
                 </TabContainer>}
                 {value === 9 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -577,6 +697,15 @@ class Points extends Component {
                 </TabContainer>}
                 {value === 10 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline
@@ -629,6 +758,15 @@ class Points extends Component {
                 </TabContainer>}
                 {value === 11 && 
                 <TabContainer>
+                    <div>
+                        <TextField
+                        label='Name'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        />
+                    </div>
                     <TextField
                     label='location'
                     multiline

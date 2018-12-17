@@ -11,7 +11,7 @@ class Herbs extends Component {
     render(){
         return (
             <div style={{marginTop: 20, flexGrow: 1}} >
-        SUP G
+        Herbs
           </div>
         )
         
