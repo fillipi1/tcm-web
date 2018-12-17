@@ -23,8 +23,16 @@ class Points extends Component {
     state={
         category: this.props.category,
         value: 0,
+        point: '',
         name: '',
         location: '',
+        attribute: '',
+        contraindication: '',
+        function: '',
+        needling: '',
+        indication: '',
+        organ: ''
+
 
 
     }
@@ -32,24 +40,59 @@ class Points extends Component {
         this.setState({ value });
       };
       
-      handleInputName(message) {
-        this.setState({ name: message.target.value });
+      handleInputName(entry) {
+        this.setState({ name: entry.target.value });
       };
 
-      handleInputLocation(message) {
-        this.setState({ location: message.target.value });
+      handleInputOrgan(entry) {
+        this.setState({ organ: entry.target.value });
+      };
+
+      handleInputPoint(entry) {
+        this.setState({ point: entry.target.value });
+      };
+
+      handleInputLocation(entry) {
+        this.setState({ location: entry.target.value });
+      };
+
+      handleInputAtribute(entry) {
+        this.setState({ attribute: entry.target.value });
+      };
+
+      handleInputFunction(entry) {
+        this.setState({ function: entry.target.value });
+      };
+
+      handleInputContraindication(entry) {
+        this.setState({ contraindication: entry.target.value });
+      };
+
+      handleInputindication(entry) {
+        this.setState({ indication: entry.target.value });
+      };
+
+      handleInputNeedling(entry) {
+        this.setState({ needling: entry.target.value });
       };
     addMessage(e) {
         // register sent messaged from dashboard into firebase
         if (this.state.name === '') { return console.log('nada');
         }else{
-            const outgoingPoint = firebase.database().ref(`points/`);
             const item = {
                 name: this.state.name,
                 location: this.state.location,
+                attribute: this.state.attribute,
+                function: this.state.function,
+                contraindication: this.state.contraindication,
+                indication: this.state.indication,
+                needling: this.state.needling
             };
-            outgoingPoint.push(item);
+            firebase.database().ref(`points`).child(this.state.organ).child(this.state.point).set(item);
+
+            //outgoingPoint.push(item);
         }
+        this.setState({ location:'', needling:'', contraindication: '', indication:'', function:'', attribute:'' })
     }
     render(){
         console.log(this.state.name, this.state.location)
@@ -84,6 +127,24 @@ class Points extends Component {
                 {value === 0 && 
                 <TabContainer >
                     <div>
+                    <TextField
+                        label='organ'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        value={this.state.organ}
+                        onChange={entry => this.handleInputOrgan(entry)}
+                        />
+                        <TextField
+                        label='point'
+                        rows="1"
+                        margin="normal"
+                        variant="outlined"
+                        style={{width:342}}
+                        value={this.state.point}
+                        onChange={entry => this.handleInputPoint(entry)}
+                        />
                         <TextField
                         label='Name'
                         rows="1"
@@ -91,7 +152,7 @@ class Points extends Component {
                         variant="outlined"
                         style={{width:342}}
                         value={this.state.name}
-                        onChange={message => this.handleInputName(message)}
+                        onChange={entry => this.handleInputName(entry)}
                         />
                     </div>
                     <TextField
@@ -102,7 +163,7 @@ class Points extends Component {
                     variant="outlined"
                     style={{width:342, padding:3}}
                     value={this.state.location}
-                    onChange={message => this.handleInputLocation(message)}
+                    onChange={entry => this.handleInputLocation(entry)}
                     />
                     <TextField
                     label='attributes'
@@ -111,6 +172,8 @@ class Points extends Component {
                     margin="normal"
                     variant="outlined"
                     style={{width:342, padding:3}}
+                    value={this.state.attribute}
+                    onChange={entry => this.handleInputAtribute(entry)}
                     />
                     <TextField
                     label='indication'
@@ -119,6 +182,8 @@ class Points extends Component {
                     margin="normal"
                     variant="outlined"
                     style={{width:342, padding:3}}
+                    value={this.state.indication}
+                    onChange={entry => this.handleInputindication(entry)}
                     />
                     <TextField
                     label='functions'
@@ -127,6 +192,8 @@ class Points extends Component {
                     margin="normal"
                     variant="outlined"
                     style={{width:342, padding:3}}
+                    value={this.state.function}
+                    onChange={entry => this.handleInputFunction(entry)}
                     />
                     <TextField
                     label='Needling method'
@@ -135,6 +202,8 @@ class Points extends Component {
                     margin="normal"
                     variant="outlined"
                     style={{width:342, padding:3}}
+                    value={this.state.needling}
+                    onChange={entry => this.handleInputNeedling(entry)}
                     />
                     <TextField
                     label='contra indications'
@@ -143,6 +212,8 @@ class Points extends Component {
                     margin="normal"
                     variant="outlined"
                     style={{width:342, padding:3}}
+                    value={this.state.contraindication}
+                    onChange={entry => this.handleInputContraindication(entry)}
                     />
                     <MyButton onClick={this.addMessage.bind(this)}>Submit</MyButton>
                 </TabContainer>}
